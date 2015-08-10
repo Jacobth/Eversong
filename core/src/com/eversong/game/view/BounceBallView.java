@@ -1,5 +1,7 @@
 package com.eversong.game.view;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,22 +21,21 @@ public class BounceBallView {
     private Texture shieldTexture;
     private Player player;
 
-    public void createBody(World world) {
+    public void createBody(World world, Camera camera) {
         sprite = new Sprite(new Texture("android/assets/bounce.png"));
-        sprite.setPosition(0, 0);
+        sprite.setPosition(-camera.viewportWidth/2, 0);
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
 
         bodyDef.position.set((sprite.getX() +sprite.getWidth()/2)/ Eversong.SCALE, (sprite.getY() + sprite.getHeight()/2)/Eversong.SCALE);
 
         body = world.createBody(bodyDef);
 
-        //Create the body as a circle
+        //Create the body as a box
         CircleShape shape = new CircleShape();
 
-        shape.setRadius(sprite.getWidth()/(2* Eversong.SCALE));
-
+        shape.setRadius(sprite.getWidth() / (2 * Eversong.SCALE));
 
         //Set physical attributes to the body
         FixtureDef fixtureDef = new FixtureDef();
@@ -49,7 +50,15 @@ public class BounceBallView {
         shape.dispose();
     }
 
-    public void renderBall(SpriteBatch batch) {
+    public void renderBall(SpriteBatch batch, OrthographicCamera camera) {
+
+       // System.out.println(sprite.getX() + "camera: " + camera.viewportWidth / 2);
+
+        if(sprite.getX()==-camera.viewportWidth/2)
+            body.setLinearVelocity(9f, 0);
+        else if(sprite.getX()>=camera.viewportWidth/2)
+            body.setLinearVelocity(-9f,0);
+
         batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
                 sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());

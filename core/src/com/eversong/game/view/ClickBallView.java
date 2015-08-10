@@ -1,5 +1,6 @@
 package com.eversong.game.view;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,11 +19,13 @@ public class ClickBallView {
     private Texture shieldTexture;
     private Player player;
 
-    public void createBody(Player player, World world) {
+    public void createBody(Player player, World world, Camera camera) {
         this.player = player;
-        ClickBall clickBall = player.getClickBall();
-
         sprite = new Sprite(new Texture("android/assets/ball.png"));
+        ClickBall clickBall = player.getClickBall();
+        clickBall.setPosition(0- sprite.getWidth()/2, camera.viewportHeight/2- sprite.getHeight());
+
+
         sprite.setPosition(clickBall.getX(), clickBall.getY());
 
         BodyDef bodyDef = new BodyDef();
@@ -41,10 +44,10 @@ public class ClickBallView {
         //Set physical attributes to the body
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 20f;
-        fixtureDef.friction = 5f;
+        fixtureDef.density = 2f;
+        fixtureDef.friction = 1f;
         //Make the ball bounce on other bodies
-        fixtureDef.restitution = 0f;
+        fixtureDef.restitution = 1f;
 
         body.createFixture(fixtureDef);
 
@@ -56,6 +59,7 @@ public class ClickBallView {
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
                 sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
         batch.end();
+       // body.setLinearDamping(1f);
     }
 
     public void setPosition(ClickBall ball) {

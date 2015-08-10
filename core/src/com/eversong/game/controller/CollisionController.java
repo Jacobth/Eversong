@@ -20,13 +20,16 @@ public class CollisionController implements ContactListener, IController{
     private String message;
     private Body body;
     private Body bounce;
-    private Body wall;
+    private Body upperWall;
+    private Body downWall;
 
-    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body wall) {
+    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body downWall, Body upperWall, Player player) {
         this.tileList = tileList;
         this.body = body;
         this.bounce = bounce;
-        this.wall = wall;
+        this.downWall = downWall;
+        this.upperWall = upperWall;
+        this.player = player;
 
         //  FileHandle collisionFileHandle = Gdx.files.internal("sounds/collision.mp3");
         // sound = Gdx.audio.newSound(collisionFileHandle);
@@ -48,17 +51,19 @@ public class CollisionController implements ContactListener, IController{
         Body b = contact.getFixtureB().getBody();
 
         if(a == body && b == bounce) {
-            b.applyLinearImpulse(0.3f, 1.1f, b.getPosition().x, b.getPosition().y, true);
-            System.out.println("Sucess");
+           // b.applyLinearImpulse(0.3f, 1.1f, b.getPosition().x, b.getPosition().y, true);
+            System.out.println("Fail");
         }
-        else if(a == bounce && b == body) {
-            a.applyLinearImpulse(0.3f, 1.1f, a.getPosition().x, a.getPosition().y, true);
+
+      else if(a == downWall && b == body) {
+            body.setLinearDamping(400000f);
+            player.addScore();
+            System.out.println(player.getScore());
         }
-        else if(a == bounce && b == wall) {
-            System.out.println("fail");
-        }
-        else if(a == wall && b == bounce) {
-            System.out.println("fail");
+        else if(a == upperWall && b == body) {
+            body.setLinearDamping(400000f);
+            player.addScore();
+            System.out.println(player.getScore());
         }
     }
 

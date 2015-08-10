@@ -1,6 +1,7 @@
 package com.eversong.game.controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,7 +32,7 @@ public class ClickBallController implements InputProcessor, IController{
         this.camera = camera;
 
         clickBallView = new ClickBallView();
-        clickBallView.createBody(player, world);
+        clickBallView.createBody(player, world, camera);
         this.body = clickBallView.getBody();
 
         Gdx.input.setInputProcessor(this);
@@ -66,7 +67,16 @@ public class ClickBallController implements InputProcessor, IController{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        clickBallView.getBody().setTransform(Gdx.input.getX()/Eversong.SCALE-(camera.viewportWidth/2/Eversong.SCALE), -Gdx.input.getY()/Eversong.SCALE+(camera.viewportHeight/2/Eversong.SCALE), clickBallView.getBody().getAngle());
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+        }
+        else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+        }
+
+        //clickBallView.getBody().setTransform(Gdx.input.getX()/Eversong.SCALE-(camera.viewportWidth/2/Eversong.SCALE), -Gdx.input.getY()/Eversong.SCALE+(camera.viewportHeight/2/Eversong.SCALE), clickBallView.getBody().getAngle());
         return false;
     }
 

@@ -31,7 +31,7 @@ public class EversongView {
     private Sprite background;
 
     public void onCreate() {
-        world = new World(new Vector2(0, -2f), true);
+        world = new World(new Vector2(0, 0), true);
 
         debugRenderer = new Box2DDebugRenderer();
 

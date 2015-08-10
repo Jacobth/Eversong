@@ -20,13 +20,14 @@ public class TileView{
     private Body body;
     private float width,height;
 
-    public TileView(World world, Tile tile, Texture texture, SpriteBatch batch) {
+    public TileView(World world, Tile tile, Texture texture, SpriteBatch batch, Sprite sprite) {
         this.world = world;
         this.tile = tile;
         this.texture = texture;
         this.batch = batch;
-        this.sprite = new Sprite(texture);
-        this.sprite.setPosition(tile.getX(), tile.getY());
+        this.sprite = sprite;
+        sprite.setPosition(tile.getX(), tile.getY());
+        //sprite.setSize(texture.getWidth(), 0);
         this.width = sprite.getWidth();
         this.height = sprite.getHeight();
     }
