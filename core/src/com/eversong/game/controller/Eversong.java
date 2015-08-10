@@ -1,7 +1,9 @@
 package com.eversong.game.controller;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.eversong.game.model.Player;
@@ -23,6 +25,7 @@ public class Eversong extends Game{
     private SpriteBatch batch;
 
     private Player player;
+    private BitmapFont font;
 
     private ArrayList<IController> controllerList;
     private ClickBallController clickBallController;
@@ -40,6 +43,8 @@ public class Eversong extends Game{
 
         controllerList = new ArrayList<IController>();
 
+        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
+
         createClickBall();
         createWalls();
         createBounceBall();
@@ -48,7 +53,7 @@ public class Eversong extends Game{
             controller.onCreate();
 
         collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(),
-                tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player);
+                tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch);
 
         controllerList.add(collisionController);
     }
@@ -62,7 +67,15 @@ public class Eversong extends Game{
 
         world.setContactListener(collisionController);
 
+        draw();
+
         eversongView.setDebugRenderer();
+    }
+
+    public void draw() {
+        batch.begin();
+        font.draw(batch, player.getScore()+ "", -camera.viewportWidth/2 + font.getSpaceWidth(), camera.viewportHeight/2 - font.getSpaceWidth());
+        batch.end();
     }
 
     public void createClickBall() {

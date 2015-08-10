@@ -3,6 +3,8 @@ package com.eversong.game.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 import com.eversong.game.model.Player;
@@ -17,19 +19,21 @@ public class CollisionController implements ContactListener, IController{
     private ArrayList<Body> tileList;
     private Sound sound;
     private Player player;
-    private String message;
     private Body body;
     private Body bounce;
     private Body upperWall;
     private Body downWall;
+    private BitmapFont font;
+    private SpriteBatch batch;
 
-    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body downWall, Body upperWall, Player player) {
+    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
         this.tileList = tileList;
         this.body = body;
         this.bounce = bounce;
         this.downWall = downWall;
         this.upperWall = upperWall;
         this.player = player;
+        this.batch = batch;
 
         //  FileHandle collisionFileHandle = Gdx.files.internal("sounds/collision.mp3");
         // sound = Gdx.audio.newSound(collisionFileHandle);
@@ -58,6 +62,7 @@ public class CollisionController implements ContactListener, IController{
       else if(a == downWall && b == body) {
             body.setLinearDamping(400000f);
             player.addScore();
+           // message = player.getScore() + "";
             System.out.println(player.getScore());
         }
         else if(a == upperWall && b == body) {
