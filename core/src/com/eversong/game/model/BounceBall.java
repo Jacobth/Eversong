@@ -7,6 +7,7 @@ public class BounceBall {
 
     private float x;
     private float y;
+    private float radius;
 
     public BounceBall() {
 
@@ -26,6 +27,12 @@ public class BounceBall {
     public void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+    public float getRadius() {
+        return radius;
     }
 
 }

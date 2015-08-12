@@ -5,14 +5,19 @@ package com.eversong.game.model;
  */
 public class Player {
     private ClickBall clickBall;
+    private BounceBall bounceBall;
     private int score;
 
     public Player() {
         clickBall = new ClickBall();
+        bounceBall = new BounceBall();
         score = 0;
     }
     public ClickBall getClickBall() {
         return clickBall;
+    }
+    public BounceBall getBounceBall() {
+        return bounceBall;
     }
 
     public int getScore() {

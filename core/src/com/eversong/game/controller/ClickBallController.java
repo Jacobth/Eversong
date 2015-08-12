@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -108,5 +109,8 @@ public class ClickBallController implements InputProcessor, IController{
     }
     public Body getBody() {
         return clickBallView.getBody();
+    }
+    public Sprite getSprite() {
+        return clickBallView.getSprite();
     }
 }

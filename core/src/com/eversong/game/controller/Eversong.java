@@ -49,9 +49,13 @@ public class Eversong extends Game{
         createWalls();
         createBounceBall();
 
+
+
         for (IController controller : controllerList)
             controller.onCreate();
 
+        controllerList.add(new LightController(world, camera, player));
+        controllerList.get(controllerList.size()-1).onCreate();
         collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(),
                 tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch);
 
@@ -83,6 +87,7 @@ public class Eversong extends Game{
 
         clickBallController = new ClickBallController(player, batch, world, camera);
         controllerList.add(clickBallController);
+        player.getClickBall().setRadius(clickBallController.getSprite().getHeight()/2);
     }
     private void createWalls() {
         tileWallController = new TileController(world, batch, camera);
@@ -90,7 +95,7 @@ public class Eversong extends Game{
         controllerList.add(tileWallController);
     }
     private void createBounceBall() {
-        bounceBallController = new BounceBallController(world, batch, camera);
+        bounceBallController = new BounceBallController(world, batch, camera , player);
         controllerList.add(bounceBallController);
     }
 }

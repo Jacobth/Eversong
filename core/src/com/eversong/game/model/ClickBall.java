@@ -6,6 +6,7 @@ package com.eversong.game.model;
 public class ClickBall {
     private float x;
     private float y;
+    private float radius;
 
     public ClickBall() {
 
@@ -25,6 +26,13 @@ public class ClickBall {
     public void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+
+    public float getRadius() {
+        return radius;
     }
 }
 

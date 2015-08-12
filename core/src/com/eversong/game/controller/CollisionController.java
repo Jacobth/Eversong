@@ -60,13 +60,13 @@ public class CollisionController implements ContactListener, IController{
         }
 
       else if(a == downWall && b == body) {
-            body.setLinearDamping(400000f);
+            body.setLinearDamping(40f);
             player.addScore();
            // message = player.getScore() + "";
             System.out.println(player.getScore());
         }
         else if(a == upperWall && b == body) {
-            body.setLinearDamping(400000f);
+            body.setLinearDamping(40f);
             player.addScore();
             System.out.println(player.getScore());
         }
