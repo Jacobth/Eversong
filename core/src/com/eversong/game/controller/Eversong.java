@@ -26,6 +26,7 @@ public class Eversong extends Game{
 
     private Player player;
     private BitmapFont font;
+    private boolean isGameOver = false;
 
     private ArrayList<IController> controllerList;
     private ClickBallController clickBallController;
@@ -73,12 +74,14 @@ public class Eversong extends Game{
 
         draw();
 
+        isGameOver = collisionController.isGameOver();
+
         eversongView.setDebugRenderer();
     }
 
     public void draw() {
         batch.begin();
-        font.draw(batch, player.getScore()+ "", -camera.viewportWidth/2 + font.getSpaceWidth(), camera.viewportHeight/2 - font.getSpaceWidth());
+        font.draw(batch, player.getScore() + "", -camera.viewportWidth / 2 + font.getSpaceWidth(), camera.viewportHeight/2 - font.getSpaceWidth());
         batch.end();
     }
 
@@ -97,5 +100,9 @@ public class Eversong extends Game{
     private void createBounceBall() {
         bounceBallController = new BounceBallController(world, batch, camera , player);
         controllerList.add(bounceBallController);
+    }
+
+    public boolean getIsGameOver() {
+        return isGameOver;
     }
 }

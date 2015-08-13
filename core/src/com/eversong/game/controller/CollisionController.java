@@ -25,6 +25,7 @@ public class CollisionController implements ContactListener, IController{
     private Body downWall;
     private BitmapFont font;
     private SpriteBatch batch;
+    private boolean gameOver = false;
 
     public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
         this.tileList = tileList;
@@ -56,6 +57,7 @@ public class CollisionController implements ContactListener, IController{
 
         if(a == body && b == bounce) {
            // b.applyLinearImpulse(0.3f, 1.1f, b.getPosition().x, b.getPosition().y, true);
+            gameOver = true;
             System.out.println("Fail");
         }
 
@@ -85,6 +87,10 @@ public class CollisionController implements ContactListener, IController{
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
 

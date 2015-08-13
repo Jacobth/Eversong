@@ -68,11 +68,11 @@ public class ClickBallController implements InputProcessor, IController{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0) {
             clickBallView.getBody().setLinearDamping(0f);
             clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
         }
-        else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        else if(Gdx.input.isKeyPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0) {
             clickBallView.getBody().setLinearDamping(0f);
             clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
         }
@@ -84,7 +84,6 @@ public class ClickBallController implements InputProcessor, IController{
             clickBallView.getBody().setLinearDamping(0f);
             clickBallView.getBody().applyLinearImpulse(2f, 0f, clickBallView.getX(), clickBallView.getY(), true);
         }
-        //clickBallView.getBody().setTransform(Gdx.input.getX()/Eversong.SCALE-(camera.viewportWidth/2/Eversong.SCALE), -Gdx.input.getY()/Eversong.SCALE+(camera.viewportHeight/2/Eversong.SCALE), clickBallView.getBody().getAngle());
         return false;
     }
 
