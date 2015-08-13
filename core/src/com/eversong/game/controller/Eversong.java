@@ -63,7 +63,7 @@ public class Eversong extends Game{
 
         controllerList.add(new LightController(world, camera,player, ball1, ball2));
         controllerList.get(controllerList.size()-1).onCreate();
-        collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(),
+        collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(), bounceBallController2.getBody(),
                 tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch);
 
         controllerList.add(collisionController);
@@ -106,8 +106,8 @@ public class Eversong extends Game{
     private void createBounceBall() {
         ball1 = new BounceBall();
         ball2 = new BounceBall();
-        bounceBallController = new BounceBallController(world, batch, camera , player, bounceTexture.getHeight(), ball1);
-        bounceBallController2 = new BounceBallController(world, batch, camera , player, -bounceTexture.getHeight(), ball2);
+        bounceBallController = new BounceBallController(world, batch, camera , player, bounceTexture.getHeight(), ball1, -1);
+        bounceBallController2 = new BounceBallController(world, batch, camera , player, -bounceTexture.getHeight(), ball2, 1);
         controllerList.add(bounceBallController);
         controllerList.add(bounceBallController2);
     }

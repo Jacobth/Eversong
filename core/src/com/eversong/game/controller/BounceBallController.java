@@ -25,20 +25,22 @@ public class BounceBallController implements IController{
     private OrthographicCamera camera;
     private Player player;
     private float yDiff;
+    private float direction;
 
-    public BounceBallController(World world, SpriteBatch batch, OrthographicCamera camera, Player player, float yDiff, BounceBall b) {
+    public BounceBallController(World world, SpriteBatch batch, OrthographicCamera camera, Player player, float yDiff, BounceBall bounceBall, float direction) {
         this.world = world;
         this.batch = batch;
         this.camera = camera;
         this.player = player;
-        bounceBall = b;
+        this.bounceBall = bounceBall;
         this.yDiff = yDiff;
+        this.direction = direction;
     }
 
     @Override
     public void onCreate() {
         bounceBallView = new BounceBallView();
-        bounceBallView.createBody(world, camera, yDiff);
+        bounceBallView.createBody(world, camera, yDiff, direction);
         bounceBall.setRadius(bounceBallView.getSprite().getHeight() / 2);
     }
 

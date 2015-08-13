@@ -20,17 +20,19 @@ public class CollisionController implements ContactListener, IController{
     private Sound sound;
     private Player player;
     private Body body;
-    private Body bounce;
+    private Body bounce1;
+    private Body bounce2;
     private Body upperWall;
     private Body downWall;
     private BitmapFont font;
     private SpriteBatch batch;
     private boolean gameOver = false;
 
-    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
+    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce1, Body bounce2, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
         this.tileList = tileList;
         this.body = body;
-        this.bounce = bounce;
+        this.bounce1 = bounce1;
+        this.bounce2 = bounce2;
         this.downWall = downWall;
         this.upperWall = upperWall;
         this.player = player;
@@ -55,8 +57,13 @@ public class CollisionController implements ContactListener, IController{
         Body a = contact.getFixtureA().getBody();
         Body b = contact.getFixtureB().getBody();
 
-        if(a == body && b == bounce) {
+        if(a == body && b == bounce1) {
            // b.applyLinearImpulse(0.3f, 1.1f, b.getPosition().x, b.getPosition().y, true);
+            gameOver = true;
+            System.out.println("Fail");
+        }
+        else if(a == body && b == bounce2) {
+            // b.applyLinearImpulse(0.3f, 1.1f, b.getPosition().x, b.getPosition().y, true);
             gameOver = true;
             System.out.println("Fail");
         }
