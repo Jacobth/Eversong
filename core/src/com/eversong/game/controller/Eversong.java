@@ -3,9 +3,11 @@ package com.eversong.game.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
+import com.eversong.game.model.BounceBall;
 import com.eversong.game.model.Player;
 import com.eversong.game.view.EversongView;
 
@@ -25,6 +27,8 @@ public class Eversong extends Game{
     private SpriteBatch batch;
 
     private Player player;
+    private BounceBall ball1;
+    private BounceBall ball2;
     private BitmapFont font;
     private boolean isGameOver = false;
 
@@ -32,7 +36,9 @@ public class Eversong extends Game{
     private ClickBallController clickBallController;
     private TileController tileWallController;
     private BounceBallController bounceBallController;
+    private BounceBallController bounceBallController2;
     private CollisionController collisionController;
+    private Texture bounceTexture;
 
     @Override
     public void create() {
@@ -41,7 +47,7 @@ public class Eversong extends Game{
         world = eversongView.getWorld();
         camera = eversongView.getCamera();
         batch = eversongView.getBatch();
-
+        bounceTexture = new Texture("android/assets/bounce.png");
         controllerList = new ArrayList<IController>();
 
         font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
@@ -55,7 +61,7 @@ public class Eversong extends Game{
         for (IController controller : controllerList)
             controller.onCreate();
 
-        controllerList.add(new LightController(world, camera, player));
+        controllerList.add(new LightController(world, camera,player, ball1, ball2));
         controllerList.get(controllerList.size()-1).onCreate();
         collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(),
                 tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch);
@@ -98,8 +104,12 @@ public class Eversong extends Game{
         controllerList.add(tileWallController);
     }
     private void createBounceBall() {
-        bounceBallController = new BounceBallController(world, batch, camera , player);
+        ball1 = new BounceBall();
+        ball2 = new BounceBall();
+        bounceBallController = new BounceBallController(world, batch, camera , player, bounceTexture.getHeight(), ball1);
+        bounceBallController2 = new BounceBallController(world, batch, camera , player, -bounceTexture.getHeight(), ball2);
         controllerList.add(bounceBallController);
+        controllerList.add(bounceBallController2);
     }
 
     public boolean getIsGameOver() {

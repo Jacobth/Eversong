@@ -20,10 +20,12 @@ public class BounceBallView {
     private Body body;
     private Texture shieldTexture;
     private Player player;
+    private float yDiff;
 
-    public void createBody(World world, Camera camera) {
+    public void createBody(World world, Camera camera, float yDiff) {
         sprite = new Sprite(new Texture("android/assets/bounce.png"));
-        sprite.setPosition(-camera.viewportWidth/2, 0);
+        this.yDiff = yDiff;
+        sprite.setPosition(-camera.viewportWidth/2 , yDiff);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
