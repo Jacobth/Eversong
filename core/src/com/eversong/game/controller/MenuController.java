@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.eversong.game.model.Player;
+import com.eversong.game.model.Timer;
 import com.eversong.game.view.MenuView;
 
 import java.io.FileInputStream;
@@ -28,6 +29,7 @@ public class MenuController implements ApplicationListener, InputProcessor{
     private MenuView menuView;
     private Eversong eversong;
     private Preferences prefs;
+    private Timer timer;
 
 
     @Override
@@ -36,6 +38,7 @@ public class MenuController implements ApplicationListener, InputProcessor{
         Gdx.input.setInputProcessor(menuView.getStage());
         addListeners();
         prefs = Gdx.app.getPreferences("My Preferences");
+        timer = new Timer(1f);
     }
 
     public void addListeners() {
@@ -57,11 +60,16 @@ public class MenuController implements ApplicationListener, InputProcessor{
         if (eversong == null) {
             menuView.update();
             Eversong.highScore = prefs.getInteger("score", 0);
+            timer = new Timer(1f);
         } else if (!eversong.getIsGameOver()) {
             eversong.render();
         } else {
             setHighScore();
+            timer.update(Gdx.graphics.getDeltaTime());
+            if (timer.hasTimeElapsed())
             eversong = null;
+            else
+                eversong.render();
             Gdx.input.setInputProcessor(menuView.getStage());
         }
     }

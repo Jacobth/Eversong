@@ -84,7 +84,7 @@ public class Eversong extends Game{
 
         isGameOver = collisionController.isGameOver();
 
-        eversongView.setDebugRenderer();
+       // eversongView.setDebugRenderer();
     }
 
     public void draw() {
