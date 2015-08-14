@@ -3,10 +3,17 @@ package com.eversong.game.controller;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.eversong.game.model.Player;
 import com.eversong.game.view.MenuView;
+
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.Writer;
 
 /**
  * Created by jacobth on 2015-08-13.
@@ -15,21 +22,21 @@ public class MenuController implements ApplicationListener, InputProcessor {
 
     private MenuView menuView;
     private Eversong eversong;
-    private boolean isInFocus = true;
+    private Preferences prefs;
 
     @Override
     public void create() {
         menuView = new MenuView();
-
         Gdx.input.setInputProcessor(menuView.getStage());
         addListeners();
+        prefs = Gdx.app.getPreferences("My Preferences");
     }
 
     public void addListeners() {
         menuView.getPlayButton().addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                    eversong = new Eversong();
-                    eversong.create();
+                eversong = new Eversong();
+                eversong.create();
             }
         });
     }
@@ -43,17 +50,26 @@ public class MenuController implements ApplicationListener, InputProcessor {
     public void render() {
         if (eversong == null) {
             menuView.update();
+            Eversong.highScore = prefs.getInteger("score", 0);
         } else if (!eversong.getIsGameOver()) {
             eversong.render();
         } else {
+            setHighScore();
             eversong = null;
             Gdx.input.setInputProcessor(menuView.getStage());
         }
     }
 
+    private void setHighScore() {
+        if(Eversong.highScore < eversong.getHighScore()) {
+            Eversong.highScore = eversong.getHighScore();
+            prefs.putInteger("score", Eversong.highScore);
+        }
+    }
+
     @Override
     public void pause() {
-
+        prefs.flush();
     }
 
     @Override

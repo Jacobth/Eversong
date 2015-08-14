@@ -40,6 +40,8 @@ public class Eversong extends Game{
     private CollisionController collisionController;
     private Texture bounceTexture;
 
+    public static int highScore = 0;
+
     @Override
     public void create() {
         eversongView = new EversongView();
@@ -114,5 +116,9 @@ public class Eversong extends Game{
 
     public boolean getIsGameOver() {
         return isGameOver;
+    }
+
+    public int getHighScore() {
+        return player.getScore();
     }
 }
