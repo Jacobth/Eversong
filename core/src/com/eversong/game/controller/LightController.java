@@ -10,7 +10,7 @@ import com.eversong.game.model.Player;
 
 public class LightController implements IController {
 
-    private float dayTime = 0.2f;
+    private float dayTime = 1f;
     private RayHandler lightHandler;
     private World world;
     private OrthographicCamera camera;
@@ -45,8 +45,8 @@ public class LightController implements IController {
     @Override
     public void onRender() {
 
-        //if(dayTime <0.7f)
-          //  dayTime = dayTime + 0.003f; //Speed of day will arise
+        if(dayTime >0.2f)
+            dayTime = dayTime - 0.006f; //Speed of day will arise
         lightHandler.setAmbientLight(dayTime);
 
         lightBall1.setPosition(player.getClickBall().getX() + player.getClickBall().getRadius(), player.getClickBall().getY() + player.getClickBall().getRadius());

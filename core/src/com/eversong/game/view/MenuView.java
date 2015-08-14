@@ -8,12 +8,16 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.eversong.game.controller.ClickBallController;
 import com.eversong.game.controller.Eversong;
+import com.eversong.game.model.Player;
 
 /**
  * Created by jacobth on 2015-08-13.
@@ -27,6 +31,9 @@ public class MenuView {
     private final static int[] SCREEN_RESOLUTION = {Gdx.graphics.getWidth(), Gdx.graphics.getHeight()};
     private final static float DEFAULT_ALPHA = 1f;
     private BitmapFont font;
+    private ClickBallController clickBallController;
+    private Player player;
+    private World world;
 
 
     private ImageButton playButton;
@@ -40,8 +47,10 @@ public class MenuView {
         FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
         Texture backgroundTexture = new Texture(backFileHandle);
         background = new Sprite(backgroundTexture);
-
+        world = new World(new Vector2(0, 0), true);
         createPlay();
+    //    createClickBall();
+     //   clickBallController.onCreate();
     }
 
     public void createPlay() {
@@ -62,6 +71,8 @@ public class MenuView {
     }
 
     public void update() {
+        world.step(1f / 60f, 6, 2);
+
         batch.begin();
         camera.update();
         batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2);
@@ -74,6 +85,13 @@ public class MenuView {
     }
 
     public void draw() {
-        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth()/2, 0 - font.getSpaceWidth());
+        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth() / 2, 0 - font.getSpaceWidth());
+    }
+
+    public void createClickBall() {
+        player = new Player();
+        clickBallController = new ClickBallController(player, batch, world, camera);
+        player.getClickBall().setRadius(clickBallController.getSprite().getHeight() / 2);
+        clickBallController.getBody().applyForceToCenter(-10f, -24f, true);
     }
 }
