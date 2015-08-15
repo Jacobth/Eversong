@@ -47,10 +47,9 @@ public class MenuView {
         FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
         Texture backgroundTexture = new Texture(backFileHandle);
         background = new Sprite(backgroundTexture);
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         world = new World(new Vector2(0, 0), true);
         createPlay();
-    //    createClickBall();
-     //   clickBallController.onCreate();
     }
 
     public void createPlay() {
@@ -75,7 +74,7 @@ public class MenuView {
 
         batch.begin();
         camera.update();
-        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2);
+        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         draw();
         for(Actor a: stage.getActors()){
             a.draw(batch, DEFAULT_ALPHA);
@@ -85,7 +84,7 @@ public class MenuView {
     }
 
     public void draw() {
-        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth() / 2, 0 - font.getSpaceWidth());
+        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth() - font.getSpaceWidth()/2, 0 - font.getSpaceWidth());
     }
 
     public void createClickBall() {

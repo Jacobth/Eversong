@@ -35,7 +35,8 @@ public class EversongView {
 
         debugRenderer = new Box2DDebugRenderer();
 
-        camera = new OrthographicCamera(480, 800);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        System.out.println(Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
 
         Gdx.gl.glClearColor(106f / 255f, 165f / 255f, 255f / 255f, 1f);
 
@@ -45,6 +46,7 @@ public class EversongView {
         backgroundTexture = new Texture(backFileHandle);
 
         background = new Sprite(backgroundTexture);
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     public void onRender() {
@@ -58,7 +60,7 @@ public class EversongView {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2);
+        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
     }
     public World getWorld() {

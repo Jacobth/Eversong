@@ -54,6 +54,22 @@ public class ClickBallController implements InputProcessor, IController, Gesture
 
     @Override
     public boolean keyDown(int keycode) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(-2f, 0f, clickBallView.getX(), clickBallView.getY(), true);
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            clickBallView.getBody().setLinearDamping(0f);
+            clickBallView.getBody().applyLinearImpulse(2f, 0f, clickBallView.getX(), clickBallView.getY(), true);
+        }
         return false;
     }
 

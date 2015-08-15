@@ -21,6 +21,7 @@ public class Eversong extends Game{
     private EversongView eversongView;
 
     public static final float SCALE = 100f;
+    public static final float [] SCREEN_SCALE = {1200/Gdx.graphics.getWidth(), 1920/Gdx.graphics.getHeight()};
 
     private World world;
     private OrthographicCamera camera;

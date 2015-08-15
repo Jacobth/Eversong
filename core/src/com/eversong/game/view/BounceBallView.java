@@ -53,13 +53,10 @@ public class BounceBallView {
     }
 
     public void renderBall(SpriteBatch batch, OrthographicCamera camera) {
-
-       // System.out.println(sprite.getX() + "camera: " + camera.viewportWidth / 2);
-
-        if(sprite.getX()==-camera.viewportWidth/2)
-            body.setLinearVelocity(9f, 0);
+        if(sprite.getX()==-camera.viewportWidth/2 || sprite.getX() < -camera.viewportWidth/2)
+            body.setLinearVelocity(10f, 0);
         else if(sprite.getX()>=camera.viewportWidth/2)
-            body.setLinearVelocity(-9f,0);
+            body.setLinearVelocity(-10f,0);
 
         batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
