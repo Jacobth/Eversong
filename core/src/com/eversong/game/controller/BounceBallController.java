@@ -19,7 +19,6 @@ public class BounceBallController implements IController{
     private SpriteBatch batch;
     private BounceBall bounceBall;
     private OrthographicCamera camera;
-    private Player player;
     private float yDiff;
     private float direction;
 
@@ -27,7 +26,6 @@ public class BounceBallController implements IController{
         this.world = world;
         this.batch = batch;
         this.camera = camera;
-        this.player = player;
         this.bounceBall = bounceBall;
         this.yDiff = yDiff;
         this.direction = direction;

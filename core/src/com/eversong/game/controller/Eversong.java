@@ -49,12 +49,12 @@ public class Eversong extends Game{
         world = eversongView.getWorld();
         camera = eversongView.getCamera();
         batch = eversongView.getBatch();
-       // bounceTexture = new Texture("bounce.png");
-        bounceTexture = new Texture("android/assets/bounce.png");
+        bounceTexture = new Texture("bounce.png");
+       // bounceTexture = new Texture("android/assets/bounce.png");
         controllerList = new ArrayList<IController>();
 
-       // font = new BitmapFont(Gdx.files.internal("test.fnt"));
-        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
+        font = new BitmapFont(Gdx.files.internal("test.fnt"));
+       // font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
 
         createClickBall();
         createWalls();

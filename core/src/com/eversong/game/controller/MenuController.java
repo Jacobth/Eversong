@@ -30,9 +30,10 @@ public class MenuController implements ApplicationListener, InputProcessor{
         prefs = Gdx.app.getPreferences("My Preferences");
         timer = new Timer(1f);
 
-        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/waited.mp3");
-        sound = Gdx.audio.newSound(collisionFileHandle);
-        sound.loop();
+        //FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/waited.mp3");
+       // FileHandle collisionFileHandle = Gdx.files.internal("sounds/waited.mp3");
+      //  sound = Gdx.audio.newSound(collisionFileHandle);
+       // sound.loop();
     }
 
     public void addListeners() {

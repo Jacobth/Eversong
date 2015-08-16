@@ -37,7 +37,8 @@ public class CollisionController implements ContactListener, IController{
         this.player = player;
         this.batch = batch;
 
-        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
+       // FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
+        FileHandle collisionFileHandle = Gdx.files.internal("sounds/eversonghit.mp3");
         sound = Gdx.audio.newSound(collisionFileHandle);
     }
 
