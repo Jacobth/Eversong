@@ -28,7 +28,7 @@ public class MenuView {
     private final Sprite background;
     private final Stage stage;
     private final OrthographicCamera camera;
-    private final static int[] SCREEN_RESOLUTION = {Gdx.graphics.getWidth(), Gdx.graphics.getHeight()};
+  //  private final static int[] SCREEN_RESOLUTION = {Gdx.graphics.getWidth(), Gdx.graphics.getHeight()};
     private final static float DEFAULT_ALPHA = 1f;
     private BitmapFont font;
     private ClickBallController clickBallController;
@@ -40,21 +40,21 @@ public class MenuView {
 
     public MenuView() {
         stage = new Stage();
-        camera = new OrthographicCamera(SCREEN_RESOLUTION[0], SCREEN_RESOLUTION[1]);
+        camera = new OrthographicCamera(540, 960);
         stage.getViewport().setCamera(camera);
         batch = new SpriteBatch();
-        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
-        FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
+        font = new BitmapFont(Gdx.files.internal("test.fnt"));
+        FileHandle backFileHandle = Gdx.files.internal("background.png");
         Texture backgroundTexture = new Texture(backFileHandle);
         background = new Sprite(backgroundTexture);
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        background.setSize(camera.viewportWidth, camera.viewportHeight);
         world = new World(new Vector2(0, 0), true);
         createPlay();
     }
 
     public void createPlay() {
         final Drawable playDrawable = new TextureRegionDrawable(new TextureRegion(
-                new Texture(Gdx.files.internal("android/assets/play.png"))));
+                new Texture(Gdx.files.internal("play.png"))));
         playButton = new ImageButton(playDrawable);
         playButton.setPosition(-playButton.getWidth() / 2, playButton.getHeight() / 2);
         playButton.setBounds(playButton.getX(), playButton.getY(), playButton.getWidth(), playButton.getHeight());
@@ -74,7 +74,7 @@ public class MenuView {
 
         batch.begin();
         camera.update();
-        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, camera.viewportWidth, camera.viewportHeight);
         draw();
         for(Actor a: stage.getActors()){
             a.draw(batch, DEFAULT_ALPHA);

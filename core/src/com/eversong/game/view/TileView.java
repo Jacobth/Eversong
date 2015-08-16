@@ -27,17 +27,10 @@ public class TileView{
         this.batch = batch;
         this.sprite = sprite;
         sprite.setPosition(tile.getX(), tile.getY());
-        //sprite.setSize(texture.getWidth(), 0);
         this.width = sprite.getWidth();
         this.height = sprite.getHeight();
     }
 
-    public TileView(World world, Tile tile,float width, float height) {
-        this.world = world;
-        this.tile = tile;
-        this.width = width;
-        this.height = height;
-    }
     public void createBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;

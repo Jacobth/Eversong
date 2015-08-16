@@ -35,18 +35,17 @@ public class EversongView {
 
         debugRenderer = new Box2DDebugRenderer();
 
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        System.out.println(Gdx.graphics.getWidth() + " " + Gdx.graphics.getHeight());
+        camera = new OrthographicCamera(540, 960);
 
         Gdx.gl.glClearColor(106f / 255f, 165f / 255f, 255f / 255f, 1f);
 
         batch = new SpriteBatch();
 
-        FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
+        FileHandle backFileHandle = Gdx.files.internal("background.png");
         backgroundTexture = new Texture(backFileHandle);
 
         background = new Sprite(backgroundTexture);
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        background.setSize(camera.viewportWidth, camera.viewportHeight);
     }
 
     public void onRender() {
@@ -60,7 +59,7 @@ public class EversongView {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, camera.viewportWidth, camera.viewportHeight);
         batch.end();
     }
     public World getWorld() {

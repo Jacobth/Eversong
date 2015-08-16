@@ -1,6 +1,5 @@
 package com.eversong.game.controller;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,9 +8,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.eversong.game.model.BounceBall;
 import com.eversong.game.model.Player;
 import com.eversong.game.view.BounceBallView;
-
-import java.util.ArrayList;
-
 
 /**
  * Created by jaclun on 7/10/2015.

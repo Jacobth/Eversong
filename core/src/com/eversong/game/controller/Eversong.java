@@ -21,7 +21,6 @@ public class Eversong extends Game{
     private EversongView eversongView;
 
     public static final float SCALE = 100f;
-    public static final float [] SCREEN_SCALE = {1200/Gdx.graphics.getWidth(), 1920/Gdx.graphics.getHeight()};
 
     private World world;
     private OrthographicCamera camera;
@@ -50,16 +49,14 @@ public class Eversong extends Game{
         world = eversongView.getWorld();
         camera = eversongView.getCamera();
         batch = eversongView.getBatch();
-        bounceTexture = new Texture("android/assets/bounce.png");
+        bounceTexture = new Texture("bounce.png");
         controllerList = new ArrayList<IController>();
 
-        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
+        font = new BitmapFont(Gdx.files.internal("test.fnt"));
 
         createClickBall();
         createWalls();
         createBounceBall();
-
-
 
         for (IController controller : controllerList)
             controller.onCreate();

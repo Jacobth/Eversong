@@ -4,22 +4,10 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.eversong.game.model.Player;
 import com.eversong.game.model.Timer;
 import com.eversong.game.view.MenuView;
-
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.Writer;
 
 /**
  * Created by jacobth on 2015-08-13.
@@ -66,8 +54,10 @@ public class MenuController implements ApplicationListener, InputProcessor{
         } else {
             setHighScore();
             timer.update(Gdx.graphics.getDeltaTime());
-            if (timer.hasTimeElapsed())
-            eversong = null;
+            if (timer.hasTimeElapsed()) {
+                eversong = null;
+                prefs.flush();
+            }
             else
                 eversong.render();
             Gdx.input.setInputProcessor(menuView.getStage());

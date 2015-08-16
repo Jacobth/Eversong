@@ -1,14 +1,10 @@
 package com.eversong.game.controller;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 import com.eversong.game.model.Player;
-import com.eversong.game.model.Timer;
 
 import java.util.ArrayList;
 
@@ -28,7 +24,6 @@ public class CollisionController implements ContactListener, IController{
     private BitmapFont font;
     private SpriteBatch batch;
     private boolean gameOver = false;
-    private Timer timer;
 
     public CollisionController(ArrayList<Body> tileList,Body body, Body bounce1, Body bounce2, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
         this.tileList = tileList;
@@ -39,7 +34,6 @@ public class CollisionController implements ContactListener, IController{
         this.upperWall = upperWall;
         this.player = player;
         this.batch = batch;
-        timer = new Timer(5f);
 
         //  FileHandle collisionFileHandle = Gdx.files.internal("sounds/collision.mp3");
         // sound = Gdx.audio.newSound(collisionFileHandle);
@@ -63,26 +57,22 @@ public class CollisionController implements ContactListener, IController{
         if(a == body && b == bounce1) {
                 body.applyForceToCenter(2f, -30f, false);
                 gameOver = true;
-                System.out.println("Fail");
         }
         else if(a == body && b == bounce2) {
                 body.applyForceToCenter(1f, 30f, false);
                 gameOver = true;
-                System.out.println("Fail");
         }
 
       else if(a == downWall && b == body) {
             if(!gameOver) {
                 body.setLinearDamping(40f);
                 player.addScore();
-                System.out.println(player.getScore());
             }
         }
         else if(a == upperWall && b == body) {
             if(!gameOver) {
                 body.setLinearDamping(40f);
                 player.addScore();
-                System.out.println(player.getScore());
             }
         }
     }

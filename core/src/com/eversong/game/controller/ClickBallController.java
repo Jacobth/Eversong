@@ -2,9 +2,9 @@ package com.eversong.game.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
@@ -38,7 +38,12 @@ public class ClickBallController implements InputProcessor, IController, Gesture
         clickBallView.createBody(player, world, camera);
         this.body = clickBallView.getBody();
 
-        Gdx.input.setInputProcessor(this);
+       // Gdx.input.setInputProcessor(this);
+        InputMultiplexer im = new InputMultiplexer();
+        GestureDetector gd = new GestureDetector(this);
+        im.addProcessor(gd);
+        im.addProcessor(this);
+        Gdx.input.setInputProcessor(im);
     }
 
     @Override
