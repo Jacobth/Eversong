@@ -23,7 +23,9 @@ public class BounceBallView {
     private float yDiff;
 
     public void createBody(World world, Camera camera, float yDiff, float direction) {
-        sprite = new Sprite(new Texture("bounce.png"));
+        //sprite = new Sprite(new Texture("bounce.png"));
+        sprite = new Sprite(new Texture("android/assets/bounce.png"));
+
         this.yDiff = yDiff;
         sprite.setPosition(direction * camera.viewportWidth/2 , yDiff);
 

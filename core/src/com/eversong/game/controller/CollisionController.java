@@ -1,6 +1,8 @@
 package com.eversong.game.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
@@ -35,8 +37,8 @@ public class CollisionController implements ContactListener, IController{
         this.player = player;
         this.batch = batch;
 
-        //  FileHandle collisionFileHandle = Gdx.files.internal("sounds/collision.mp3");
-        // sound = Gdx.audio.newSound(collisionFileHandle);
+        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
+        sound = Gdx.audio.newSound(collisionFileHandle);
     }
 
     @Override
@@ -64,12 +66,14 @@ public class CollisionController implements ContactListener, IController{
         }
 
       else if(a == downWall && b == body) {
+            sound.play();
             if(!gameOver) {
                 body.setLinearDamping(40f);
                 player.addScore();
             }
         }
         else if(a == upperWall && b == body) {
+            sound.play();
             if(!gameOver) {
                 body.setLinearDamping(40f);
                 player.addScore();

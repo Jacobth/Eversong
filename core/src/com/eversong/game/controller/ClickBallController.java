@@ -61,11 +61,13 @@ public class ClickBallController implements InputProcessor, IController, Gesture
     public boolean keyDown(int keycode) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0) {
             clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+          //  clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+            clickBallView.getBody().setLinearVelocity(0f, -15f);
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0) {
             clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+          //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+            clickBallView.getBody().setLinearVelocity(0f, 15f);
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             clickBallView.getBody().setLinearDamping(0f);
@@ -90,22 +92,6 @@ public class ClickBallController implements InputProcessor, IController, Gesture
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0) {
-            clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0) {
-            clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(-2f, 0f, clickBallView.getX(), clickBallView.getY(), true);
-        }
-        else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            clickBallView.getBody().setLinearDamping(0f);
-            clickBallView.getBody().applyLinearImpulse(2f, 0f, clickBallView.getX(), clickBallView.getY(), true);
-        }
         return false;
     }
 
@@ -163,10 +149,12 @@ public class ClickBallController implements InputProcessor, IController, Gesture
         }else{
             if(velocityY>0){
                 clickBallView.getBody().setLinearDamping(0f);
-                clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+             //   clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
+                clickBallView.getBody().setLinearVelocity(0f, -14f);
             }else{
                 clickBallView.getBody().setLinearDamping(0f);
-                clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+              //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
+                clickBallView.getBody().setLinearVelocity(0f, 14f);
             }
         }
         return false;

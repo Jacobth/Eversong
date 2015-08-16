@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.eversong.game.model.Timer;
@@ -18,7 +20,7 @@ public class MenuController implements ApplicationListener, InputProcessor{
     private Eversong eversong;
     private Preferences prefs;
     private Timer timer;
-
+    private Sound sound;
 
     @Override
     public void create() {
@@ -27,6 +29,10 @@ public class MenuController implements ApplicationListener, InputProcessor{
         addListeners();
         prefs = Gdx.app.getPreferences("My Preferences");
         timer = new Timer(1f);
+
+        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/waited.mp3");
+        sound = Gdx.audio.newSound(collisionFileHandle);
+        sound.loop();
     }
 
     public void addListeners() {

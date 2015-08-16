@@ -43,8 +43,12 @@ public class MenuView {
         camera = new OrthographicCamera(540, 960);
         stage.getViewport().setCamera(camera);
         batch = new SpriteBatch();
-        font = new BitmapFont(Gdx.files.internal("test.fnt"));
-        FileHandle backFileHandle = Gdx.files.internal("background.png");
+       // font = new BitmapFont(Gdx.files.internal("test.fnt"));
+       // FileHandle backFileHandle = Gdx.files.internal("background.png");
+
+        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
+        FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
+
         Texture backgroundTexture = new Texture(backFileHandle);
         background = new Sprite(backgroundTexture);
         background.setSize(camera.viewportWidth, camera.viewportHeight);
@@ -53,8 +57,11 @@ public class MenuView {
     }
 
     public void createPlay() {
+       // final Drawable playDrawable = new TextureRegionDrawable(new TextureRegion(
+              //  new Texture(Gdx.files.internal("play.png"))));
+
         final Drawable playDrawable = new TextureRegionDrawable(new TextureRegion(
-                new Texture(Gdx.files.internal("play.png"))));
+                new Texture(Gdx.files.internal("android/assets/play.png"))));
         playButton = new ImageButton(playDrawable);
         playButton.setPosition(-playButton.getWidth() / 2, playButton.getHeight() / 2);
         playButton.setBounds(playButton.getX(), playButton.getY(), playButton.getWidth(), playButton.getHeight());

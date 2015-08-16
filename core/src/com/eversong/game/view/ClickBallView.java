@@ -21,7 +21,10 @@ public class ClickBallView {
 
     public void createBody(Player player, World world, Camera camera) {
         this.player = player;
-        sprite = new Sprite(new Texture("ball.png"));
+       // sprite = new Sprite(new Texture("ball.png"));
+
+        sprite = new Sprite(new Texture("android/assets/ball.png"));
+
         ClickBall clickBall = player.getClickBall();
         clickBall.setPosition(0- sprite.getWidth()/2, camera.viewportHeight/2- sprite.getHeight());
 
