@@ -38,12 +38,12 @@ public class ClickBallController implements InputProcessor, IController, Gesture
         clickBallView.createBody(player, world, camera);
         this.body = clickBallView.getBody();
 
-       // Gdx.input.setInputProcessor(this);
-        InputMultiplexer im = new InputMultiplexer();
+        Gdx.input.setInputProcessor(this);
+       /* InputMultiplexer im = new InputMultiplexer();
         GestureDetector gd = new GestureDetector(this);
         im.addProcessor(gd);
         im.addProcessor(this);
-        Gdx.input.setInputProcessor(im);
+        Gdx.input.setInputProcessor(im);*/
     }
 
     @Override

@@ -38,14 +38,14 @@ public class LightController implements IController {
         lightHandler.setBlurNum(3);
 
         lightBall1 = new PointLight(lightHandler, 10, Color.DARK_GRAY, 190, 0, 0); //(handler, number of rays, color, "radiuseffect",xPosition, yPosition)
-        lightBall2 = new PointLight(lightHandler, 10, Color.BLUE, 100, 0, 0);
-        lightBall3 = new PointLight(lightHandler, 10, Color.BLUE, 100, 0, 0);
+        lightBall2 = new PointLight(lightHandler, 10, Color.DARK_GRAY, 100, 0, 0);
+        lightBall3 = new PointLight(lightHandler, 10, Color.DARK_GRAY, 100, 0, 0);
     }
 
     @Override
     public void onRender() {
 
-        if(dayTime >0.2f)
+        if(dayTime >0.6f)
             dayTime = dayTime - 0.006f; //Speed of day will arise
         lightHandler.setAmbientLight(dayTime);
 
