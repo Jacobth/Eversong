@@ -91,7 +91,7 @@ public class MenuView {
     }
 
     public void draw() {
-        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth() - font.getSpaceWidth()/2, 0 - font.getSpaceWidth());
+        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth()*2, 0 - font.getSpaceWidth());
     }
 
     public void createClickBall() {

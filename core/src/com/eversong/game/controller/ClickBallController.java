@@ -38,23 +38,24 @@ public class ClickBallController implements InputProcessor, IController, Gesture
         clickBallView.createBody(player, world, camera);
         this.body = clickBallView.getBody();
 
-        Gdx.input.setInputProcessor(this);
-       /* InputMultiplexer im = new InputMultiplexer();
+      //  Gdx.input.setInputProcessor(this);
+        InputMultiplexer im = new InputMultiplexer();
         GestureDetector gd = new GestureDetector(this);
         im.addProcessor(gd);
         im.addProcessor(this);
-        Gdx.input.setInputProcessor(im);*/
+        Gdx.input.setInputProcessor(im);
     }
 
     @Override
     public void onCreate() {
-
+        clickBallView.createAnimation();
     }
 
     @Override
     public void onRender() {
         clickBallView.setPosition(clickBall);
         clickBallView.renderBall(batch);
+        clickBallView.renderAnimation(batch);
     }
 
     @Override
@@ -147,14 +148,14 @@ public class ClickBallController implements InputProcessor, IController, Gesture
                 clickBallView.getBody().applyLinearImpulse(-4f, 0f, clickBallView.getX(), clickBallView.getY(), true);
             }
         }else{
-            if(velocityY>0){
+            if(velocityY>0 && clickBallView.getBody().getPosition().y > 0){
                 clickBallView.getBody().setLinearDamping(0f);
              //   clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
-                clickBallView.getBody().setLinearVelocity(0f, -14f);
-            }else{
+                clickBallView.getBody().setLinearVelocity(0f, -15f);
+            }else if(clickBallView.getBody().getPosition().y < 0){
                 clickBallView.getBody().setLinearDamping(0f);
               //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
-                clickBallView.getBody().setLinearVelocity(0f, 14f);
+                clickBallView.getBody().setLinearVelocity(0f, 15f);
             }
         }
         return false;

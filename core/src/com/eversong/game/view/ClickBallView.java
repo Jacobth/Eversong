@@ -1,13 +1,16 @@
 package com.eversong.game.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.*;
 import com.eversong.game.controller.Eversong;
 import com.eversong.game.model.ClickBall;
 import com.eversong.game.model.Player;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * Created by jaclun on 7/10/2015.
@@ -19,13 +22,28 @@ public class ClickBallView {
     private Texture shieldTexture;
     private Player player;
 
+    private Sprite sprite2;
+
+    private static final int FRAME_COLS = 1;
+    private static final int FRAME_ROWS = 6;
+
+    private Animation walkAnimation;
+    private Texture walkSheet;
+    private TextureRegion[] walkFrames;
+    private TextureRegion currentFrame;
+
+    float stateTime;
+
+    private ClickBall clickBall;
+
+
     public void createBody(Player player, World world, Camera camera) {
         this.player = player;
        // sprite = new Sprite(new Texture("ball.png"));
 
         sprite = new Sprite(new Texture("android/assets/ball.png"));
 
-        ClickBall clickBall = player.getClickBall();
+        clickBall = player.getClickBall();
         clickBall.setPosition(0- sprite.getWidth()/2, camera.viewportHeight/2- sprite.getHeight());
 
 
@@ -43,7 +61,6 @@ public class ClickBallView {
 
         shape.setRadius(sprite.getWidth()/(2* Eversong.SCALE));
 
-
         //Set physical attributes to the body
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -55,13 +72,15 @@ public class ClickBallView {
         body.createFixture(fixtureDef);
 
         shape.dispose();
+
+        sprite.setSize(sprite.getWidth()*1.22f, sprite.getHeight());
     }
 
     public void renderBall(SpriteBatch batch) {
-        batch.begin();
+     /*   batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
                 sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
-        batch.end();
+        batch.end();*/
        // body.setLinearDamping(1f);
     }
 
@@ -82,5 +101,30 @@ public class ClickBallView {
     }
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public void createAnimation() {
+        walkSheet = new Texture(Gdx.files.internal("android/assets/birds2.png"));
+        TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
+        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                walkFrames[index++] = tmp[i][j];
+            }
+        }
+        walkAnimation = new Animation(0.04f, walkFrames);
+        stateTime = 0f;
+    }
+
+    public void renderAnimation(SpriteBatch batch) {
+        stateTime += Gdx.graphics.getDeltaTime();
+        currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+        sprite2 = new Sprite(currentFrame);
+        sprite2.setPosition(clickBall.getX(), clickBall.getY());
+        batch.begin();
+        batch.draw(sprite2, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
+                sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+        batch.end();
     }
 }

@@ -45,11 +45,11 @@ public class LightController implements IController {
     @Override
     public void onRender() {
 
-        if(dayTime >0.6f)
+        if(dayTime >0.9f)
             dayTime = dayTime - 0.006f; //Speed of day will arise
         lightHandler.setAmbientLight(dayTime);
 
-        lightBall1.setPosition(player.getClickBall().getX() + player.getClickBall().getRadius(), player.getClickBall().getY() + player.getClickBall().getRadius());
+        //lightBall1.setPosition(player.getClickBall().getX() + player.getClickBall().getRadius()*1.5f, player.getClickBall().getY() + player.getClickBall().getRadius());
         lightBall2.setPosition(ball1.getX() + ball1.getRadius(), ball1.getY() + ball1.getRadius());
         lightBall3.setPosition(ball2.getX() + ball2.getRadius(), ball2.getY() + ball2.getRadius());
         lightHandler.setCombinedMatrix(camera);

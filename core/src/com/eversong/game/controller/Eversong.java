@@ -56,6 +56,7 @@ public class Eversong extends Game{
         //font = new BitmapFont(Gdx.files.internal("test.fnt"));
         font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
 
+        createCloud();
         createClickBall();
         createWalls();
         createBounceBall();
@@ -89,7 +90,7 @@ public class Eversong extends Game{
 
     public void draw() {
         batch.begin();
-        font.draw(batch, player.getScore() + "", -camera.viewportWidth / 2 + font.getSpaceWidth(), camera.viewportHeight/2 - font.getSpaceWidth());
+        font.draw(batch, player.getScore() + "", -camera.viewportWidth / 2 + font.getSpaceWidth(), camera.viewportHeight / 2 - font.getSpaceWidth());
         batch.end();
     }
 
@@ -98,7 +99,7 @@ public class Eversong extends Game{
 
         clickBallController = new ClickBallController(player, batch, world, camera);
         controllerList.add(clickBallController);
-        player.getClickBall().setRadius(clickBallController.getSprite().getHeight()/2);
+        player.getClickBall().setRadius(clickBallController.getSprite().getHeight() / 2);
     }
     private void createWalls() {
         tileWallController = new TileController(world, batch, camera);
@@ -112,6 +113,13 @@ public class Eversong extends Game{
         bounceBallController2 = new BounceBallController(world, batch, camera , player, -bounceTexture.getHeight(), ball2, 1);
         controllerList.add(bounceBallController);
         controllerList.add(bounceBallController2);
+    }
+
+    private void createCloud() {
+        CloudController cloudController = new CloudController(camera, batch, -camera.viewportWidth/2);
+        CloudController cloudController2 = new CloudController(camera, batch, -camera.viewportWidth/9);
+        controllerList.add(cloudController);
+        controllerList.add(cloudController2);
     }
 
     public boolean getIsGameOver() {
