@@ -29,6 +29,7 @@ public class CollisionController implements ContactListener, IController{
     private BitmapFont font;
     private SpriteBatch batch;
     private boolean gameOver = false;
+    private float volume;
 
     public CollisionController(ArrayList<Body> tileList,Body body, Body bounce1, Body bounce2, Body downWall, Body upperWall, Player player, SpriteBatch batch, Body leftWall, Body rightWall) {
         this.tileList = tileList;
@@ -41,12 +42,15 @@ public class CollisionController implements ContactListener, IController{
         this.rightWall = rightWall;
         this.player = player;
         this.batch = batch;
+        this.volume = 1f;
 
         FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/reward.mp3");
         FileHandle collisionFileHandle2 = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
-        //FileHandle collisionFileHandle = Gdx.files.internal("sounds/eversonghit.mp3");
         sound = Gdx.audio.newSound(collisionFileHandle);
         hit = Gdx.audio.newSound(collisionFileHandle2);
+
+        if(MenuController.isMuted)
+            volume = 0;
     }
 
     @Override
@@ -75,26 +79,28 @@ public class CollisionController implements ContactListener, IController{
 
       else if(a == downWall && b == body) {
             if(!gameOver) {
-                sound.play();
+                sound.play(volume);
                 body.setLinearDamping(40f);
                 player.addScore();
                 Eversong.isScore = true;
             }
             else
-                hit.play();
+                hit.play(volume);
         }
         else if(a == upperWall && b == body) {
             if(!gameOver) {
-                sound.play();
+                sound.play(volume);
                 body.setLinearDamping(40f);
                 player.addScore();
                 Eversong.isScore = true;
             }
-            else
-                hit.play();
+            else {
+                hit.play(volume);
+            }
         }
-        else if(a == rightWall || a == leftWall)
-            hit.play();
+        else if(a == rightWall || a == leftWall) {
+            hit.play(volume);
+        }
     }
 
     @Override

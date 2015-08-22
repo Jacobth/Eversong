@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -34,15 +35,19 @@ public class MenuView {
     private ClickBallController clickBallController;
     private Player player;
     private World world;
+    private GlyphLayout layout;
 
 
     private ImageButton playButton;
+    private ImageButton soundButton;
+    private ImageButton muteButton;
 
     public MenuView() {
         stage = new Stage();
         camera = new OrthographicCamera(540, 960);
         stage.getViewport().setCamera(camera);
         batch = new SpriteBatch();
+        layout = new GlyphLayout();
        // font = new BitmapFont(Gdx.files.internal("test.fnt"));
      //   FileHandle backFileHandle = Gdx.files.internal("background.png");
 
@@ -66,6 +71,21 @@ public class MenuView {
         playButton.setPosition(-playButton.getWidth() / 2, playButton.getHeight() / 2);
         playButton.setBounds(playButton.getX(), playButton.getY(), playButton.getWidth(), playButton.getHeight());
         stage.addActor(playButton);
+
+        final Drawable soundDrawable = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("android/assets/sound.png"))));
+        soundButton = new ImageButton(soundDrawable);
+        soundButton.setPosition(-camera.viewportWidth / 2 + soundButton.getWidth() / 2, camera.viewportHeight / 2 - soundButton.getHeight() * 2);
+        soundButton.setBounds(soundButton.getX(), soundButton.getY(), soundButton.getWidth(), soundButton.getHeight());
+        stage.addActor(soundButton);
+
+        final Drawable muteDrawable = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("android/assets/mute.png"))));
+        muteButton = new ImageButton(muteDrawable);
+        muteButton.setSize(0, 0);
+        muteButton.setPosition(-camera.viewportWidth / 2 + soundButton.getWidth() / 2, camera.viewportHeight / 2 - soundButton.getHeight() * 2);
+        muteButton.setBounds(muteButton.getX(), muteButton.getY(), muteButton.getWidth(), muteButton.getHeight());
+        stage.addActor(muteButton);
     }
 
     public Stage getStage(){
@@ -74,6 +94,12 @@ public class MenuView {
 
     public ImageButton getPlayButton(){
         return playButton;
+    }
+    public ImageButton getSoundButton(){
+        return soundButton;
+    }
+    public ImageButton getMuteButton(){
+        return muteButton;
     }
 
     public void update() {
@@ -91,7 +117,9 @@ public class MenuView {
     }
 
     public void draw() {
-        font.draw(batch, Eversong.highScore + "", 0 - font.getSpaceWidth()*2, 0 - font.getSpaceWidth());
+        layout.setText(font, Eversong.highScore+"");
+        float width = layout.width;
+        font.draw(batch, layout, 0 - width/2, 0);
     }
 
     public void createClickBall() {

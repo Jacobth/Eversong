@@ -6,8 +6,13 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.eversong.game.model.Timer;
 import com.eversong.game.view.MenuView;
 
@@ -20,20 +25,26 @@ public class MenuController implements ApplicationListener, InputProcessor{
     private Eversong eversong;
     private Preferences prefs;
     private Timer timer;
-    private Sound sound;
+    private Image mute;
+    public static boolean isMuted;
+    private Texture soundTexture;
+    private Texture muteTexture;
 
     @Override
     public void create() {
+        isMuted = false;
         menuView = new MenuView();
         Gdx.input.setInputProcessor(menuView.getStage());
         addListeners();
         prefs = Gdx.app.getPreferences("My Preferences");
         timer = new Timer(1f);
 
-        //FileHandle collisionFileHandle = Gdx.files.internal("sounds/waited.mp3");
-       // FileHandle collisionFileHandle = Gdx.files.internal("sounds/waited.mp3");
-      //  sound = Gdx.audio.newSound(collisionFileHandle);
-       // sound.loop();
+        FileHandle muteFile = Gdx.files.internal("android/assets/mute.png");
+        Texture texture = new Texture(muteFile);
+        mute = new Image(texture);
+
+        soundTexture = new Texture(Gdx.files.internal("android/assets/sound.png"));
+        muteTexture = new Texture(Gdx.files.internal("android/assets/mute.png"));
     }
 
     public void addListeners() {
@@ -41,6 +52,20 @@ public class MenuController implements ApplicationListener, InputProcessor{
             public void clicked(InputEvent event, float x, float y) {
                 eversong = new Eversong();
                 eversong.create();
+            }
+        });
+        menuView.getSoundButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                MenuController.isMuted = true;
+                menuView.getMuteButton().setSize(muteTexture.getWidth(), muteTexture.getHeight());
+                menuView.getSoundButton().setSize(0, 0);
+            }
+        });
+        menuView.getMuteButton().addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                MenuController.isMuted = false;
+                menuView.getMuteButton().setSize(0, 0);
+                menuView.getSoundButton().setSize(soundTexture.getWidth(), soundTexture.getHeight());
             }
         });
     }
