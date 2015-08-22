@@ -41,9 +41,11 @@ public class Eversong extends Game{
     private Texture bounceTexture;
 
     public static int highScore = 0;
+    public static boolean isScore;
 
     @Override
     public void create() {
+        isScore = true;
         eversongView = new EversongView();
         eversongView.onCreate();
         world = eversongView.getWorld();
@@ -67,7 +69,7 @@ public class Eversong extends Game{
         controllerList.add(new LightController(world, camera,player, ball1, ball2));
         controllerList.get(controllerList.size()-1).onCreate();
         collisionController = new CollisionController(tileWallController.getWallList(), clickBallController.getBody(), bounceBallController.getBody(), bounceBallController2.getBody(),
-                tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch);
+                tileWallController.getWallList().get(0), tileWallController.getWallList().get(1), player, batch, tileWallController.getWallList().get(2), tileWallController.getWallList().get(3));
 
         controllerList.add(collisionController);
     }

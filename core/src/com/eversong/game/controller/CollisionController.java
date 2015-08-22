@@ -17,29 +17,36 @@ public class CollisionController implements ContactListener, IController{
 
     private ArrayList<Body> tileList;
     private Sound sound;
+    private Sound hit;
     private Player player;
     private Body body;
     private Body bounce1;
     private Body bounce2;
     private Body upperWall;
     private Body downWall;
+    private Body leftWall;
+    private Body rightWall;
     private BitmapFont font;
     private SpriteBatch batch;
     private boolean gameOver = false;
 
-    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce1, Body bounce2, Body downWall, Body upperWall, Player player, SpriteBatch batch) {
+    public CollisionController(ArrayList<Body> tileList,Body body, Body bounce1, Body bounce2, Body downWall, Body upperWall, Player player, SpriteBatch batch, Body leftWall, Body rightWall) {
         this.tileList = tileList;
         this.body = body;
         this.bounce1 = bounce1;
         this.bounce2 = bounce2;
         this.downWall = downWall;
         this.upperWall = upperWall;
+        this.leftWall = leftWall;
+        this.rightWall = rightWall;
         this.player = player;
         this.batch = batch;
 
-        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
+        FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/reward.mp3");
+        FileHandle collisionFileHandle2 = Gdx.files.internal("android/assets/sounds/eversonghit.mp3");
         //FileHandle collisionFileHandle = Gdx.files.internal("sounds/eversonghit.mp3");
         sound = Gdx.audio.newSound(collisionFileHandle);
+        hit = Gdx.audio.newSound(collisionFileHandle2);
     }
 
     @Override
@@ -67,19 +74,27 @@ public class CollisionController implements ContactListener, IController{
         }
 
       else if(a == downWall && b == body) {
-            sound.play();
             if(!gameOver) {
+                sound.play();
                 body.setLinearDamping(40f);
                 player.addScore();
+                Eversong.isScore = true;
             }
+            else
+                hit.play();
         }
         else if(a == upperWall && b == body) {
-            sound.play();
             if(!gameOver) {
+                sound.play();
                 body.setLinearDamping(40f);
                 player.addScore();
+                Eversong.isScore = true;
             }
+            else
+                hit.play();
         }
+        else if(a == rightWall || a == leftWall)
+            hit.play();
     }
 
     @Override

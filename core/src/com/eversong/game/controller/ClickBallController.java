@@ -60,15 +60,17 @@ public class ClickBallController implements InputProcessor, IController, Gesture
 
     @Override
     public boolean keyDown(int keycode) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0 && Eversong.isScore) {
             clickBallView.getBody().setLinearDamping(0f);
           //  clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
             clickBallView.getBody().setLinearVelocity(0f, -15f);
+            Eversong.isScore = false;
         }
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0) {
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0 && Eversong.isScore) {
             clickBallView.getBody().setLinearDamping(0f);
           //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
             clickBallView.getBody().setLinearVelocity(0f, 15f);
+            Eversong.isScore = false;
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             clickBallView.getBody().setLinearDamping(0f);
@@ -148,14 +150,16 @@ public class ClickBallController implements InputProcessor, IController, Gesture
                 clickBallView.getBody().applyLinearImpulse(-4f, 0f, clickBallView.getX(), clickBallView.getY(), true);
             }
         }else{
-            if(velocityY>0 && clickBallView.getBody().getPosition().y > 0){
+            if(velocityY>0 && clickBallView.getBody().getPosition().y > 0 && Eversong.isScore){
                 clickBallView.getBody().setLinearDamping(0f);
              //   clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
                 clickBallView.getBody().setLinearVelocity(0f, -15f);
-            }else if(clickBallView.getBody().getPosition().y < 0){
+                Eversong.isScore = true;
+            }else if(clickBallView.getBody().getPosition().y < 0 && Eversong.isScore){
                 clickBallView.getBody().setLinearDamping(0f);
               //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
                 clickBallView.getBody().setLinearVelocity(0f, 15f);
+                Eversong.isScore = true;
             }
         }
         return false;
