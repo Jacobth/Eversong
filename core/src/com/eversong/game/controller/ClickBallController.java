@@ -154,7 +154,7 @@ public class ClickBallController implements InputProcessor, IController, Gesture
                 clickBallView.getBody().setLinearDamping(0f);
                 clickBallView.getBody().setLinearVelocity(0f, -16f);
                 Eversong.isScore = true;
-            }else if(clickBallView.getBody().getPosition().y < 0 && Eversong.isScore){
+            }else if(velocityY<0 && clickBallView.getBody().getPosition().y < 0 && Eversong.isScore){
                 clickBallView.getBody().setLinearDamping(0f);
                 clickBallView.getBody().setLinearVelocity(0f, 16f);
                 Eversong.isScore = true;
