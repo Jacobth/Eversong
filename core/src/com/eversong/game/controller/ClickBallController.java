@@ -63,13 +63,13 @@ public class ClickBallController implements InputProcessor, IController, Gesture
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && clickBallView.getBody().getPosition().y > 0 && Eversong.isScore) {
             clickBallView.getBody().setLinearDamping(0f);
           //  clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
-            clickBallView.getBody().setLinearVelocity(0f, -15f);
+            clickBallView.getBody().setLinearVelocity(0f, -16f);
             Eversong.isScore = false;
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && clickBallView.getBody().getPosition().y < 0 && Eversong.isScore) {
             clickBallView.getBody().setLinearDamping(0f);
           //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
-            clickBallView.getBody().setLinearVelocity(0f, 15f);
+            clickBallView.getBody().setLinearVelocity(0f, 16f);
             Eversong.isScore = false;
         }
         else if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
@@ -153,12 +153,12 @@ public class ClickBallController implements InputProcessor, IController, Gesture
             if(velocityY>0 && clickBallView.getBody().getPosition().y > 0 && Eversong.isScore){
                 clickBallView.getBody().setLinearDamping(0f);
              //   clickBallView.getBody().applyLinearImpulse(0f, -7f, clickBallView.getX(), clickBallView.getY(), true);
-                clickBallView.getBody().setLinearVelocity(0f, -15f);
+                clickBallView.getBody().setLinearVelocity(0f, -16f);
                 Eversong.isScore = true;
             }else if(clickBallView.getBody().getPosition().y < 0 && Eversong.isScore){
                 clickBallView.getBody().setLinearDamping(0f);
               //  clickBallView.getBody().applyLinearImpulse(0f, 7f, clickBallView.getX(), clickBallView.getY(), true);
-                clickBallView.getBody().setLinearVelocity(0f, 15f);
+                clickBallView.getBody().setLinearVelocity(0f, 16f);
                 Eversong.isScore = true;
             }
         }

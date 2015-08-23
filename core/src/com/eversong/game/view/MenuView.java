@@ -34,10 +34,12 @@ public class MenuView {
   //  private final static int[] SCREEN_RESOLUTION = {Gdx.graphics.getWidth(), Gdx.graphics.getHeight()};
     private final static float DEFAULT_ALPHA = 1f;
     private BitmapFont font;
+    private BitmapFont titleFont;
     private ClickBallController clickBallController;
     private Player player;
     private World world;
     private GlyphLayout layout;
+    private GlyphLayout layout2;
 
     private CloudController cloudController;
     private CloudController cloudController2;
@@ -52,10 +54,12 @@ public class MenuView {
         stage.getViewport().setCamera(camera);
         batch = new SpriteBatch();
         layout = new GlyphLayout();
+        layout2 = new GlyphLayout();
        // font = new BitmapFont(Gdx.files.internal("test.fnt"));
      //   FileHandle backFileHandle = Gdx.files.internal("background.png");
 
         font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
+        titleFont = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
         FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
 
         Texture backgroundTexture = new Texture(backFileHandle);
@@ -73,7 +77,7 @@ public class MenuView {
         final Drawable playDrawable = new TextureRegionDrawable(new TextureRegion(
                 new Texture(Gdx.files.internal("android/assets/play.png"))));
         playButton = new ImageButton(playDrawable);
-        playButton.setPosition(-playButton.getWidth() / 2, playButton.getHeight() / 2);
+        playButton.setPosition(-playButton.getWidth() / 2, 0);
         playButton.setBounds(playButton.getX(), playButton.getY(), playButton.getWidth(), playButton.getHeight());
         stage.addActor(playButton);
 
@@ -113,8 +117,8 @@ public class MenuView {
         batch.begin();
         camera.update();
         batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, camera.viewportWidth, camera.viewportHeight);
-        draw();
         drawClouds();
+        draw();
         for(Actor a: stage.getActors()){
             a.draw(batch, DEFAULT_ALPHA);
         }
@@ -125,7 +129,11 @@ public class MenuView {
     public void draw() {
         layout.setText(font, Eversong.highScore + "");
         float width = layout.width;
-        font.draw(batch, layout, 0 - width / 2, 0);
+        font.draw(batch, layout, 0 - width / 2, -playButton.getHeight() / 2);
+
+        layout2.setText(font, "Eversong");
+        float width2 = layout2.width;
+        titleFont.draw(batch, layout2, 0 - width2 / 2, playButton.getHeight()*3);
     }
 
     public void createClickBall() {
