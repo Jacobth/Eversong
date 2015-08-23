@@ -57,5 +57,20 @@ public class CloudView {
 
         return random;
     }
+    public void draw(){
+        if(cloud.getX() > camera.viewportWidth/2) {
+            randomY = randomY();
+            incX = -camera.viewportWidth/2 - sprite.getWidth();
+            cloud.setPostion(-camera.viewportWidth/2 - sprite.getWidth(), randomY());
+        }
+        else if(cloud.getX() < camera.viewportWidth * 0.60f) {
+            incX = incX + 1f;
+            cloud.setPostion(incX, randomY);
+        }
+
+        sprite.setPosition(cloud.getX(), cloud.getY());
+
+        sprite.draw(batch);
+    }
 
 }

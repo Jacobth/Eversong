@@ -2,6 +2,7 @@ package com.eversong.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.eversong.game.controller.ClickBallController;
+import com.eversong.game.controller.CloudController;
 import com.eversong.game.controller.Eversong;
 import com.eversong.game.model.Player;
 
@@ -37,6 +39,8 @@ public class MenuView {
     private World world;
     private GlyphLayout layout;
 
+    private CloudController cloudController;
+    private CloudController cloudController2;
 
     private ImageButton playButton;
     private ImageButton soundButton;
@@ -59,6 +63,7 @@ public class MenuView {
         background.setSize(camera.viewportWidth, camera.viewportHeight);
         world = new World(new Vector2(0, 0), true);
         createPlay();
+        createCloud();
     }
 
     public void createPlay() {
@@ -109,6 +114,7 @@ public class MenuView {
         camera.update();
         batch.draw(background, -camera.viewportWidth / 2, -camera.viewportHeight / 2, camera.viewportWidth, camera.viewportHeight);
         draw();
+        drawClouds();
         for(Actor a: stage.getActors()){
             a.draw(batch, DEFAULT_ALPHA);
         }
@@ -117,9 +123,9 @@ public class MenuView {
     }
 
     public void draw() {
-        layout.setText(font, Eversong.highScore+"");
+        layout.setText(font, Eversong.highScore + "");
         float width = layout.width;
-        font.draw(batch, layout, 0 - width/2, 0);
+        font.draw(batch, layout, 0 - width / 2, 0);
     }
 
     public void createClickBall() {
@@ -127,5 +133,23 @@ public class MenuView {
         clickBallController = new ClickBallController(player, batch, world, camera);
         player.getClickBall().setRadius(clickBallController.getSprite().getHeight() / 2);
         clickBallController.getBody().applyForceToCenter(-10f, -24f, true);
+    }
+    private void createCloud() {
+        cloudController = new CloudController(camera, batch, -camera.viewportWidth/2);
+        cloudController2 = new CloudController(camera, batch, -camera.viewportWidth/9);
+    }
+    private void drawClouds(){
+        cloudController.draw();
+        cloudController2.draw();
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+    public SpriteBatch getBatch() {
+        return batch;
+    }
+    public World getWorld(){
+        return world;
     }
 }

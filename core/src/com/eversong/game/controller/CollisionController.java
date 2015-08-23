@@ -26,8 +26,6 @@ public class CollisionController implements ContactListener, IController{
     private Body downWall;
     private Body leftWall;
     private Body rightWall;
-    private BitmapFont font;
-    private SpriteBatch batch;
     private boolean gameOver = false;
     private float volume;
 
@@ -41,7 +39,6 @@ public class CollisionController implements ContactListener, IController{
         this.leftWall = leftWall;
         this.rightWall = rightWall;
         this.player = player;
-        this.batch = batch;
         this.volume = 1f;
 
         FileHandle collisionFileHandle = Gdx.files.internal("android/assets/sounds/reward.mp3");

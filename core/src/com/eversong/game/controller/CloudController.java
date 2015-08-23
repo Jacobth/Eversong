@@ -24,4 +24,8 @@ public class CloudController implements IController{
     public void onRender() {
         cloudView.renderCloud();
     }
+
+    public void draw(){
+        cloudView.draw();
+    }
 }
