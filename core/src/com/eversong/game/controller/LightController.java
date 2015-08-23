@@ -45,7 +45,7 @@ public class LightController implements IController {
     @Override
     public void onRender() {
 
-        if(dayTime >0.9f)
+        if(dayTime >0.99f)
             dayTime = dayTime - 0.006f; //Speed of day will arise
         lightHandler.setAmbientLight(dayTime);
 
