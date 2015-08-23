@@ -131,7 +131,7 @@ public class MenuView {
         float width = layout.width;
         font.draw(batch, layout, 0 - width / 2, -playButton.getHeight() / 2);
 
-        layout2.setText(font, "Eversong");
+        layout2.setText(font, "Dropbird");
         float width2 = layout2.width;
         titleFont.draw(batch, layout2, 0 - width2 / 2, playButton.getHeight()*3);
     }
