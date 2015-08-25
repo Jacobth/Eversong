@@ -58,9 +58,9 @@ public class MenuView {
        // font = new BitmapFont(Gdx.files.internal("test.fnt"));
      //   FileHandle backFileHandle = Gdx.files.internal("background.png");
 
-        font = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
-        titleFont = new BitmapFont(Gdx.files.internal("android/assets/test.fnt"));
-        FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
+        font = new BitmapFont(Gdx.files.internal("test.fnt"));
+        titleFont = new BitmapFont(Gdx.files.internal("test.fnt"));
+        FileHandle backFileHandle = Gdx.files.internal("background.png");
 
         Texture backgroundTexture = new Texture(backFileHandle);
         background = new Sprite(backgroundTexture);
@@ -75,21 +75,21 @@ public class MenuView {
           //      new Texture(Gdx.files.internal("play.png"))));
 
         final Drawable playDrawable = new TextureRegionDrawable(new TextureRegion(
-                new Texture(Gdx.files.internal("android/assets/play.png"))));
+                new Texture(Gdx.files.internal("play.png"))));
         playButton = new ImageButton(playDrawable);
         playButton.setPosition(-playButton.getWidth() / 2, 0);
         playButton.setBounds(playButton.getX(), playButton.getY(), playButton.getWidth(), playButton.getHeight());
         stage.addActor(playButton);
 
         final Drawable soundDrawable = new TextureRegionDrawable(new TextureRegion(
-                new Texture(Gdx.files.internal("android/assets/sound.png"))));
+                new Texture(Gdx.files.internal("sound.png"))));
         soundButton = new ImageButton(soundDrawable);
         soundButton.setPosition(-camera.viewportWidth / 2 + soundButton.getWidth() / 2, camera.viewportHeight / 2 - soundButton.getHeight() * 2);
         soundButton.setBounds(soundButton.getX(), soundButton.getY(), soundButton.getWidth(), soundButton.getHeight());
         stage.addActor(soundButton);
 
         final Drawable muteDrawable = new TextureRegionDrawable(new TextureRegion(
-                new Texture(Gdx.files.internal("android/assets/mute.png"))));
+                new Texture(Gdx.files.internal("mute.png"))));
         muteButton = new ImageButton(muteDrawable);
         muteButton.setSize(0, 0);
         muteButton.setPosition(-camera.viewportWidth / 2 + soundButton.getWidth() / 2, camera.viewportHeight / 2 - soundButton.getHeight() * 2);
