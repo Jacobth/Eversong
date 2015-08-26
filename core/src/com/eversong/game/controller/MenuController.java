@@ -40,12 +40,12 @@ public class MenuController implements ApplicationListener, InputProcessor{
         prefs = Gdx.app.getPreferences("My Preferences");
         timer = new Timer(1f);
 
-        FileHandle muteFile = Gdx.files.internal("mute.png");
+        FileHandle muteFile = Gdx.files.internal("android/assets/mute.png");
         Texture texture = new Texture(muteFile);
         mute = new Image(texture);
 
-        soundTexture = new Texture(Gdx.files.internal("sound.png"));
-        muteTexture = new Texture(Gdx.files.internal("mute.png"));
+        soundTexture = new Texture(Gdx.files.internal("android/assets/sound.png"));
+        muteTexture = new Texture(Gdx.files.internal("android/assets/mute.png"));
     }
 
     public void addListeners() {

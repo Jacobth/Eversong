@@ -41,7 +41,7 @@ public class EversongView {
 
         batch = new SpriteBatch();
 
-        FileHandle backFileHandle = Gdx.files.internal("background.png");
+        FileHandle backFileHandle = Gdx.files.internal("android/assets/background.png");
 
       //  FileHandle backFileHandle = Gdx.files.internal("background.png");
         backgroundTexture = new Texture(backFileHandle);

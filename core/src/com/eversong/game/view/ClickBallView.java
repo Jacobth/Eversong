@@ -25,7 +25,7 @@ public class ClickBallView {
     private Sprite sprite2;
 
     private static final int FRAME_COLS = 1;
-    private static final int FRAME_ROWS = 6;
+    private static final int FRAME_ROWS = 4;
 
     private Animation walkAnimation;
     private Texture walkSheet;
@@ -41,7 +41,7 @@ public class ClickBallView {
         this.player = player;
        // sprite = new Sprite(new Texture("ball.png"));
 
-        sprite = new Sprite(new Texture("ball.png"));
+        sprite = new Sprite(new Texture("android/assets/ball.png"));
 
         clickBall = player.getClickBall();
         clickBall.setPosition(0- sprite.getWidth()/2, camera.viewportHeight/2- sprite.getHeight());
@@ -73,7 +73,7 @@ public class ClickBallView {
 
         shape.dispose();
 
-        sprite.setSize(sprite.getWidth()*1.22f, sprite.getHeight());
+        sprite.setSize(sprite.getWidth(), sprite.getHeight());
     }
 
     public void renderBall(SpriteBatch batch) {
@@ -104,7 +104,7 @@ public class ClickBallView {
     }
 
     public void createAnimation() {
-        walkSheet = new Texture(Gdx.files.internal("birds2.png"));
+        walkSheet = new Texture(Gdx.files.internal("android/assets/birds4.png"));
         TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
         walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
         int index = 0;

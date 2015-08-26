@@ -24,7 +24,7 @@ public class CloudView {
     private SpriteBatch batch;
 
     public CloudView(Camera camera, SpriteBatch batch, float x) {
-        Texture cloudTexture = new Texture("cloud.png");
+        Texture cloudTexture = new Texture("android/assets/cloud.png");
         sprite = new Sprite(cloudTexture);
         cloud = new Cloud();
         this.camera = camera;
