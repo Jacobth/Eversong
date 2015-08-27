@@ -24,8 +24,8 @@ public class ClickBallView {
 
     private Sprite sprite2;
 
-    private static final int FRAME_COLS = 1;
-    private static final int FRAME_ROWS = 4;
+    private static final int FRAME_COLS = 4;
+    private static final int FRAME_ROWS = 1;
 
     private Animation walkAnimation;
     private Texture walkSheet;
@@ -104,7 +104,7 @@ public class ClickBallView {
     }
 
     public void createAnimation() {
-        walkSheet = new Texture(Gdx.files.internal("android/assets/birds4.png"));
+        walkSheet = new Texture(Gdx.files.internal("android/assets/birds5.png"));
         TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
         walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
         int index = 0;
@@ -124,7 +124,7 @@ public class ClickBallView {
         sprite2.setPosition(clickBall.getX(), clickBall.getY());
         batch.begin();
         batch.draw(sprite2, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
-                sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(), sprite.getRotation());
+                sprite2.getWidth(), sprite2.getHeight(), sprite2.getScaleX(), sprite2.getScaleY(), sprite2.getRotation());
         batch.end();
     }
 }
