@@ -1,11 +1,9 @@
 package com.eversong.game.view;
 
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.eversong.game.controller.Eversong;
 import com.eversong.game.model.Cloud;
 
 import java.util.Random;
@@ -24,7 +22,7 @@ public class CloudView {
     private SpriteBatch batch;
 
     public CloudView(Camera camera, SpriteBatch batch, float x) {
-        Texture cloudTexture = new Texture("android/assets/cloud.png");
+        Texture cloudTexture = new Texture("cloud.png");
         sprite = new Sprite(cloudTexture);
         cloud = new Cloud();
         this.camera = camera;

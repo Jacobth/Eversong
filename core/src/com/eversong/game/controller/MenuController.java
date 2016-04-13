@@ -2,12 +2,14 @@ package com.eversong.game.controller;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -35,17 +37,23 @@ public class MenuController implements ApplicationListener, InputProcessor{
     public void create() {
         isMuted = false;
         menuView = new MenuView();
-        Gdx.input.setInputProcessor(menuView.getStage());
+
+        InputMultiplexer im = new InputMultiplexer();
+        im.addProcessor(menuView.getStage());
+        im.addProcessor(this);
+        Gdx.input.setInputProcessor(im);
+
         addListeners();
         prefs = Gdx.app.getPreferences("My Preferences");
         timer = new Timer(1f);
 
-        FileHandle muteFile = Gdx.files.internal("android/assets/mute.png");
+        FileHandle muteFile = Gdx.files.internal("mute.png");
         Texture texture = new Texture(muteFile);
         mute = new Image(texture);
 
-        soundTexture = new Texture(Gdx.files.internal("android/assets/sound.png"));
-        muteTexture = new Texture(Gdx.files.internal("android/assets/mute.png"));
+        soundTexture = new Texture(Gdx.files.internal("sound.png"));
+        muteTexture = new Texture(Gdx.files.internal("mute.png"));
+
     }
 
     public void addListeners() {
@@ -93,7 +101,11 @@ public class MenuController implements ApplicationListener, InputProcessor{
             }
             else
                 eversong.render();
-            Gdx.input.setInputProcessor(menuView.getStage());
+
+            InputMultiplexer im = new InputMultiplexer();
+            im.addProcessor(menuView.getStage());
+            im.addProcessor(this);
+            Gdx.input.setInputProcessor(im);
         }
     }
 
@@ -136,7 +148,9 @@ public class MenuController implements ApplicationListener, InputProcessor{
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        eversong = new Eversong();
+        eversong.create();
+        return true;
     }
 
     @Override

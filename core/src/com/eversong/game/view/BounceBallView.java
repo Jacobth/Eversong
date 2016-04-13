@@ -24,7 +24,7 @@ public class BounceBallView {
 
     public void createBody(World world, Camera camera, float yDiff, float direction) {
         //sprite = new Sprite(new Texture("bounce.png"));
-        sprite = new Sprite(new Texture("android/assets/bounce2.png"));
+        sprite = new Sprite(new Texture("bounce2.png"));
 
         this.yDiff = yDiff;
         sprite.setPosition(direction * camera.viewportWidth/2 , yDiff);
@@ -56,9 +56,9 @@ public class BounceBallView {
 
     public void renderBall(SpriteBatch batch, OrthographicCamera camera) {
         if(sprite.getX()==-camera.viewportWidth/2 || sprite.getX() < -camera.viewportWidth/2)
-            body.setLinearVelocity(12f, 0);
+            body.setLinearVelocity(10f, 0);
         else if(sprite.getX()>=camera.viewportWidth/2)
-            body.setLinearVelocity(-12f,0);
+            body.setLinearVelocity(-10f,0);
 
         batch.begin();
         batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(),
